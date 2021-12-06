@@ -1,7 +1,14 @@
+import socket from './utils/socketClient'
+
 function App() {
+
+  function handleClick() {
+    socket.emit('squarePress', { playerId: 1 })
+  }
+
   return (
     <div>
-      <button>Clique aqui</button>
+      <button onClick={ () => handleClick() }>Clique aqui</button>
     </div>
   );
 }
