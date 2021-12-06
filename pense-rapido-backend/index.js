@@ -16,7 +16,7 @@ const PORT = 3002
 app.use(express.json())
 app.use(cors())
 
-app.get('/', ScoreControllers.getAll)
+app.get('/:playerName', ScoreControllers.getAll)
 
 require('./sockets')(io)
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import socket from '../utils/socketClient';
 import Login from "../components/Login";
 
@@ -7,6 +7,11 @@ export default function Home() {
   function handleClick() {
     socket.emit('squarePress', { playerId: 1 })
   }
+
+  useEffect(() => {
+    socket.on('teat')
+    setIsLogged(false)
+  }, [])
 
   return(
     <div>
@@ -22,7 +27,7 @@ export default function Home() {
           </div>
         </div>
       </> : 
-      <Login />
+      <Login setIsLogged={ setIsLogged } />
       }
  
     </div>
