@@ -1,3 +1,4 @@
+const players = []
 module.exports = (io) =>
   io.on("connection", (socket) => {
     socket.on("squarePress", async ({ playerId }) => {
@@ -9,4 +10,10 @@ module.exports = (io) =>
       console.log('o Jogo foi iniciado!')
       // io.emit("updateSquarePosition") aqui vai chamar esse 'canal' para que apareça um quadrado na tela em local aleatório
     });
+    socket.on("newPlayerLogin", async ({ playerName }) => {
+      const foundPlayer = players.find(player => player === playerName)
+      if (foundPlayer) return console.log('Já existe um jogador com esse nome, favor alterar')
+      players.push(playerName)
+      console.log(`O jogador ${ playerName } se conectou`)
+    })
   });
