@@ -5,6 +5,7 @@ import Login from "../components/Login";
 export default function Home() {
   const [isLogged, setIsLogged] = useState(false);
   const [onlinePlayers, setOnlinePlayers] = useState([]);
+  const [squarePosition, setSquarePosition] = useState({ top: '0%', left: '0%' })
   function handleClick() {
     socket.emit('squarePress')
   }
@@ -14,6 +15,9 @@ export default function Home() {
       setOnlinePlayers(players);
     })
     setIsLogged(false)
+    socket.on('squarePosition', (data) => {
+      setSquarePosition(data)
+    })
   }, [])
 
   return(
@@ -21,9 +25,8 @@ export default function Home() {
       { isLogged ? 
       <>
         <h1>Pense Rápido</h1>
-        <div>
-          <div>
-            Aqui ficam as partes de configs e start do game bem como score
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <div style={{ backgroundColor: 'red', width: '10vw', height: '80vh' }}>
             <ul>
               { onlinePlayers.map((player) => 
               <li style={{ display: 'flex' }}>
@@ -33,8 +36,16 @@ export default function Home() {
             </ul>
             <button>Iniciar o Jogo</button>
           </div>
-          <div>
-            <button onClick={ () => handleClick() }>Quadrado</button>
+          <div style={{ backgroundColor: 'blue', width: '85vw' }}>
+            <button style={{ 
+              position: 'relative', 
+              display: 'block', 
+              width: '5%', 
+              height: '5%', 
+              borderRadius: '10%', 
+              top: `${squarePosition.top}`, 
+              left: `${squarePosition.left}` 
+              }} onClick={ () => handleClick() }>Quadrado</button>
           </div>
         </div>
       </> : 
