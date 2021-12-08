@@ -7,5 +7,10 @@ module.exports = (type, payload) => {
     const searchUser = players.filter((player) => player.id !== payload);
     players = searchUser;
   }
+  if (type === 'score') {
+    const playerIndex = players.map(player => player.id === payload);
+    playerIndex.indexOf(true);
+    players[playerIndex.indexOf(true)].score += 1
+  } 
   return players
 }

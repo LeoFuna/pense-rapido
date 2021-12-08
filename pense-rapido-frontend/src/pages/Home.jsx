@@ -6,7 +6,7 @@ export default function Home() {
   const [isLogged, setIsLogged] = useState(false);
   const [onlinePlayers, setOnlinePlayers] = useState([]);
   function handleClick() {
-    socket.emit('squarePress', { playerId: 1 })
+    socket.emit('squarePress')
   }
 
   useEffect(() => {
@@ -24,16 +24,17 @@ export default function Home() {
         <div>
           <div>
             Aqui ficam as partes de configs e start do game bem como score
+            <ul>
+              { onlinePlayers.map((player) => 
+              <li style={{ display: 'flex' }}>
+                <p>{ player.playerName }</p>
+                <p> {player.score} pontos</p>
+              </li>) }
+            </ul>
+            <button>Iniciar o Jogo</button>
           </div>
-          <ul>
-            { onlinePlayers.map((player) => 
-            <li style={{ display: 'flex' }}>
-              <p>{ player.playerName }</p>
-              <p>5 pontos</p>
-            </li>) }
-          </ul>
           <div>
-            <button onClick={ () => handleClick() }>Clique aqui</button>
+            <button onClick={ () => handleClick() }>Quadrado</button>
           </div>
         </div>
       </> : 
