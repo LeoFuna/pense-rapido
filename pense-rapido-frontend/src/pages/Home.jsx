@@ -4,12 +4,15 @@ import Login from "../components/Login";
 
 export default function Home() {
   const [isLogged, setIsLogged] = useState(false);
+  const [onlinePlayers, setOnlinePlayers] = useState([]);
   function handleClick() {
     socket.emit('squarePress', { playerId: 1 })
   }
 
   useEffect(() => {
-    socket.on('teat')
+    socket.on('updateOnlinePlayers', (players) => {
+      setOnlinePlayers(players);
+    })
     setIsLogged(false)
   }, [])
 
@@ -22,6 +25,9 @@ export default function Home() {
           <div>
             Aqui ficam as partes de configs e start do game bem como score
           </div>
+          <ul>
+            { onlinePlayers.map((player) => <li>{ player.playerName }</li>) }
+          </ul>
           <div>
             <button onClick={ () => handleClick() }>Clique aqui</button>
           </div>

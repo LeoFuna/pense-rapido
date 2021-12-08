@@ -1,3 +1,4 @@
+const players = require('../populate/players')
 module.exports = (io) =>
   io.on("connection", (socket) => {
     socket.on("squarePress", async ({ playerId }) => {
@@ -11,5 +12,6 @@ module.exports = (io) =>
     });
     socket.on("newPlayerLogin", async ({ playerName }) => {
       console.log(`O jogador ${ playerName } se conectou`)
+      io.emit('updateOnlinePlayers', players('add', { id: socket.id, playerName }))
     })
   });
