@@ -45,7 +45,7 @@ export default function Home() {
               borderRadius: '10%', 
               top: `${squarePosition.top}`, 
               left: `${squarePosition.left}` 
-              }} onClick={ () => handleClick() }>Quadrado</button>
+              }} onClick={ () => handleClick() }>X</button>
           </div>
         </div>
       </> : 
