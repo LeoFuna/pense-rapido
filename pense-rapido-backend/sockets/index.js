@@ -14,4 +14,7 @@ module.exports = (io) =>
       console.log(`O jogador ${ playerName } se conectou`)
       io.emit('updateOnlinePlayers', players('add', { id: socket.id, playerName }))
     })
+    socket.on('disconnect', async () => {
+      io.emit('updateOnlinePlayers', players('remove', socket.id ))
+    })
   });

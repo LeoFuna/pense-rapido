@@ -26,7 +26,11 @@ export default function Home() {
             Aqui ficam as partes de configs e start do game bem como score
           </div>
           <ul>
-            { onlinePlayers.map((player) => <li>{ player.playerName }</li>) }
+            { onlinePlayers.map((player) => 
+            <li style={{ display: 'flex' }}>
+              <p>{ player.playerName }</p>
+              <p>5 pontos</p>
+            </li>) }
           </ul>
           <div>
             <button onClick={ () => handleClick() }>Clique aqui</button>
